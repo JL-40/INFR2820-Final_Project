@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 template <typename TType, typename TWeight>
 class Graph
 {
@@ -29,10 +28,19 @@ public:
 
 
 #pragma region PUBLIC_FUNCTION
+	Graph() : adjacencyList() {} // Default constructor to safe state
+
+	void AddEdge(const TType& start, const TType& destination, const TWeight& edgeWeight)
+	{
+		adjacencyList[start].push_back(make_pair(destination, edgeWeight));
+		adjacencyList[destination].push_back(make_pair(start, edgeWeight));
+	}
+
 
 #pragma endregion
 
 };
+
 
 struct Node
 {
@@ -40,7 +48,7 @@ private:
 	string name = "";
 	bool isChargingStation = false;
 public:
-	Node(string n, bool chargingStation = false) : name(n), isChargingStation(chargingStation) {}
-	const string& Name() const { return name; }
-	const bool& IsChargingStation() const { return isChargingStation; }
+	Node(string n, bool chargingStation = false) : name(n), isChargingStation(chargingStation) {} // OVerloaded Constructor
+	const string& Name() const { return name; } // Getter
+	const bool& IsChargingStation() const { return isChargingStation; } // Getter
 };
