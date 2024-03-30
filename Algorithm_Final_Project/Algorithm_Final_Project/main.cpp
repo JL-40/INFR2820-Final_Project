@@ -2,21 +2,97 @@
 //
 
 #include <fstream>
-#include <iostream>
+
 #include "Graph.cpp"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Graph graph;
+
+	// A neighbors
+	graph.AddEdge('A', 'B', 6);
+	graph.AddEdge('A', 'F', 5);
+	
+	// B neighbors
+	graph.AddEdge('B', 'C', 5);
+	graph.AddEdge('B', 'G', 6);
+
+	// C neighbors
+	graph.AddEdge('C', 'D', 7);
+	graph.AddEdge('C', 'h', 5); // Charging Station
+
+	// D neighbors
+	graph.AddEdge('D', 'E', 7);
+	graph.AddEdge('D', 'I', 8);
+	 
+	// E neighbors
+	graph.AddEdge('E', 'I', 6);
+	graph.AddEdge('E', 'N', 15);
+	 
+	// F neighbors
+	graph.AddEdge('F', 'G', 8);
+	graph.AddEdge('F', 'J', 7);
+	 
+	// G neighbors
+	graph.AddEdge('G', 'h', 9); // Charging Station
+	graph.AddEdge('G', 'k', 8); // Charging Station
+	 
+	// H neighbors - Charging Station
+	graph.AddEdge('h', 'I', 12);
+	 
+	// I neighbors
+	graph.AddEdge('I', 'M', 10);
+	 
+	// J neighbors
+	graph.AddEdge('J', 'k', 5); // Charging Station
+	graph.AddEdge('J', 'O', 7);
+	 
+	// K neighbors - Charging Station
+	graph.AddEdge('k', 'L', 7);
+	 
+	// L neighbors
+	graph.AddEdge('L', 'M', 7);
+	graph.AddEdge('L', 'P', 7);
+	 
+	// M neighbors
+	graph.AddEdge('M', 'N', 9);
+	 
+	// N neighbors
+	graph.AddEdge('N', 'R', 7);
+	 
+	// O neighbors
+	graph.AddEdge('O', 'P', 13);
+	graph.AddEdge('O', 'S', 9);
+	 
+	// P neighbors
+	graph.AddEdge('P', 'q', 8); // Charging Station
+	graph.AddEdge('P', 'U', 11);
+	 
+	// Q neighbors - Charging Station
+	graph.AddEdge('q', 'R', 9);
+	 
+	// R neighbors
+	graph.AddEdge('R', 'W', 10);
+	 
+	// S neighbors
+	graph.AddEdge('S', 't', 9); // Charging Station
+	 
+	// T neighbors - Charging Station
+	graph.AddEdge('t', 'U', 8);
+	 
+	// U neighbors
+	graph.AddEdge('U', 'V', 8);
+	 
+	// V neighbors
+	graph.AddEdge('V', 'W', 5);
+
+	graph.Display();
+
+	
+	char start;
+	std::cout << "Choose a starting point: ";
+
+	std::cin >> start;
+
+	graph.Dijkstra(start); // A -> B -> C -> H. Total Distance: 16
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
