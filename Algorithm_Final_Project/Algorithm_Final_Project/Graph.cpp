@@ -28,15 +28,11 @@ public:
 		return adjacencyList.at(index);
 	}
 
-	/// <summary>
-	/// Add connections between two nodes (two-way). If the node does not exists, it will create it then add its neighbor.
-	/// </summary>
-	/// <param name="start:">The first node.</param>
-	/// <param name="destination:">The second node to connect to the first node.</param>
-	/// <param name="edgeWeight:">Weight of the connection.</param>
+	
+	// Add connections between two nodes, If the node does not exists, it will create it then add its neighbor.
 	void AddEdge(const char& start, const char& destination, const int& edgeWeight)
 	{
-		// Inserts or updates node's neighbor list. NOTE: if the node does not exist, it will add it before adding the neighbor.
+		// Inserts or updates node's neighbor list
 		adjacencyList[start].push_back(make_pair(destination, edgeWeight));
 		adjacencyList[destination].push_back(make_pair(start, edgeWeight));
 	}
@@ -63,27 +59,23 @@ public:
 		}
 	}
 
-	/// <summary>
-	/// Used Dijkstra's Algorithm to find the shortest path to every node in the graph.
-	/// </summary>
-	/// <param name="start:">Starting node</param>
-	/// <returns>An unordered map of nodes and the distance from the starting node's position.</returns>
+	// Used Dijkstra's Algorithm to find the shortest path to every node in the graph
 	void Dijkstra (const char& start) const
 	{
 		unordered_map<char, int> shortestPaths;
 		unordered_map<char, char> route;
 		priority_queue<pair<int, char>, vector<pair<int, char>>, greater<pair<int, char>>> visited;
 		
-		// Set all paths to each node as a very large number
+		// Set all paths to each node
 		for (const pair<char, vector<pair<char, int>>>& vertexPair : adjacencyList) 
 		{
 			shortestPaths[vertexPair.first] = numeric_limits<int>::max();
 			route[vertexPair.first] = '\0'; // Empty route
 		}
 
-		// Set the start as a distance of 0;
+		// Sets the start distance to 0 
 		shortestPaths[start] = 0;
-		visited.push(make_pair(0, start)); // Add the start to the visited list
+		visited.push(make_pair(0, start)); // Adds the start to the visited list 
 
 		while (visited.empty() == false) 
 		{
@@ -93,7 +85,7 @@ public:
 
 			visited.pop(); // A way to exit the loop
 
-			// Searches each neighbor
+			// Searches each neighborz
 			for (const pair<char, int>& neighborPair : adjacencyList.at(currentNode))
 			{
 				int newDistance = currentDistance + neighborPair.second;
@@ -121,6 +113,7 @@ public:
 		}
 	}
 
+	// Function to print the shortest path 
 	void printShortestPath(char start, char chargingStation, unordered_map<char, char>& route) const
 	{
 		if (start == chargingStation)
